@@ -22,7 +22,7 @@ def get_items():
 #     for item in items:
 #         if item["name"] == name:
 #             return {"item": item}
-#     return {"message": "Item not found"}, 404 
+#     return {"message": "Item not found"}, 404
 
 @app.get("/get-item")  # route() decorator to tell Flask what URL should trigger our function
 def get_item():
@@ -32,7 +32,6 @@ def get_item():
         if item["name"] == name:
             return {"item": item}
     return {"message": "Item not found"}, 404 
-
 
 
 @app.post("/add-items")  # route() decorator to tell Flask what URL should trigger our function
@@ -51,3 +50,17 @@ def update_item():
             item["price"] = int(request_data["price"])
             return {'message': 'Item updated successfully'},201
     return {'message': 'Item not found!'},401
+
+
+@app.delete(
+    "/delete-item"
+)  # route() decorator to tell Flask what URL should trigger our function
+def delete_item():
+    name = request.args.get("name")
+    print(name)
+    for item in items:
+        if item["name"] == name:
+            print(item)
+            items.remove(item)
+            return {"message": 'Item deleted successfully'}, 201
+    return {"message": "Item not found"}, 404 
