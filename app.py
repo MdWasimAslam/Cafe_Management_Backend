@@ -64,3 +64,7 @@ def delete_item():
             items.remove(item)
             return {"message": 'Item deleted successfully'}, 201
     return {"message": "Item not found"}, 404 
+
+
+if __name__ == "__main__":
+    app.run()  # run the development server
